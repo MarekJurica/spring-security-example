@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Index page</title>
+</head>
+<body>
+    <div sec:authorize="isAuthenticated()">
+        Logged user: <span sec:authentication="name"></span>
+    </div>
+    
+    <a href="#" th:href="@{'/login'}">Sign in</a>
+    <br>
+    <a href="#" th:href="@{'/signup'}">Sign up</a>
+    
+    <div th:if="${!users.isEmpty()}">
+        <p>
+            Users:
+            <ul>
+                <li th:each="user : ${users}" th:text="${user.username}"></li>
+            </ul>
+        </p>
+    </div>
+</body>
+</html>
